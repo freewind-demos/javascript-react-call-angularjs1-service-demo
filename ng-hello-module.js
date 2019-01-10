@@ -2,7 +2,7 @@ import angular from 'angular';
 
 const ngHelloModule = angular.module('helloModule', []);
 
-ngHelloModule.component('helloDirective', {
+ngHelloModule.component('helloComponent', {
   template: `<div>Angular: <input type="text" ng-model="$ctrl.message" ng-change="$ctrl.onMessageChange($ctrl.message)"></div>`,
   bindings: {
     message: '=',

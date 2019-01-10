@@ -21,7 +21,7 @@ class ReactHello extends Component {
     return <div>
       React: <input type="text" value={this.state.message} onChange={this.onChange}/>
       <div ref="ngRoot"
-           dangerouslySetInnerHTML={{__html: '<hello-directive message="message" on-message-change="onMessageChange"/>'}}/>
+           dangerouslySetInnerHTML={{__html: '<hello-component message="message" on-message-change="onMessageChange"/>'}}/>
     </div>;
   }
 
