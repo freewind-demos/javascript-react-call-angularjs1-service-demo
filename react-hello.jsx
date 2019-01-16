@@ -1,67 +1,25 @@
 import React, {Component} from 'react';
-import angular from 'angular';
-import ngHelloModule from './ng-hello-module';
+import {getNgService} from './ng-service-getter';
+
+const ngHelloService = getNgService('helloService');
 
 class ReactHello extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      message: 'Hello'
-    }
   }
 
   onChange = (event) => {
-    this.setState({
-      message: event.target.value
-    });
+    const value = event.target.value;
+    ngHelloService.hello(value);
   }
 
   render() {
     return <div>
-      React: <input type="text" value={this.state.message} onChange={this.onChange}/>
-      <div ref="ngRoot"
-           dangerouslySetInnerHTML={{__html: '<hello-component message="message" on-message-change="onMessageChange"/>'}}/>
+      Hello: <input type="text" defaultValue="angular" onChange={this.onChange}/>
     </div>;
   }
 
-  ngRootScope = null
-  ngTimeout = null
-
-  componentDidMount() {
-    console.log('> componentDidMount');
-    ngHelloModule.run(($rootScope, $timeout) => {
-      console.log('ngHelloModule.run')
-      this.ngRootScope = $rootScope;
-      this.ngTimeout = $timeout;
-
-      this.ngRootScope.message = this.state.message;
-      this.ngRootScope.onMessageChange = (message) => {
-        this.setState({
-          message: message
-        })
-      }
-    })
-
-    const ngRoot = this.refs.ngRoot
-    angular.bootstrap(ngRoot, [ngHelloModule.name])
-  }
-
-  componentWillUnmount() {
-    console.log('> componentWillUnmount');
-    this.ngRootScope.$destroy();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('> componentDidUpdate');
-    if (prevState.message !== this.state.message) {
-      this.ngTimeout(() => {
-        this.ngRootScope.message = this.state.message;
-      })
-    }
-  }
-
 }
-
 
 export default ReactHello;

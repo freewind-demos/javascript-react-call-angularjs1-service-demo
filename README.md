@@ -1,13 +1,10 @@
-Render a Angularjs1 Component in React Demo
-===========================================
+JavaScript React Call AngularJS1 Service Demo
+=============================================
 
-And they also communicates.
-
-And, it's much complex than "react in angularjs1".
+The key is to get the `$injector` to get the service.
 
 ```
 npm install
 npm start
 ```
 
-Note: There is also a demo for angularjs1 "directive"

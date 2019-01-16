@@ -2,14 +2,10 @@ import angular from 'angular';
 
 const ngHelloModule = angular.module('helloModule', []);
 
-ngHelloModule.component('helloComponent', {
-  template: `<div>Angular: <input type="text" ng-model="$ctrl.message" ng-change="$ctrl.onMessageChange($ctrl.message)"></div>`,
-  bindings: {
-    message: '=',
-    onMessageChange: '='
-  },
-  controller: function () {
+ngHelloModule.service('helloService', function () {
+  this.hello = (name) => {
+    console.log(`Hello, ${name}!`)
   }
-});
+})
 
 export default ngHelloModule;
